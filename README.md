@@ -47,6 +47,8 @@ Creating measurement file 'measurements.txt' with 1,000,000,000 measurements...
 Created file 'measurements.txt' with 1,000,000,000 measurements in 33.75 seconds
 ````
 
+## Run the application
 
+`dotnet run -c Release`
 
 

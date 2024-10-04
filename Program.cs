@@ -1,13 +1,16 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using BenchmarkDotNet.Running;
 using strictly_come_coding;
 using System.Diagnostics;
 
 var stopWatch = new Stopwatch();
 stopWatch.Start();
 
-var test1 = new TestParsing();
-test1.solution("measurements.txt");
+//var test1 = new TestParsing();
+//test1.solution("measurements.txt");
+
+var summary = BenchmarkRunner.Run<ParserBenchmarks>();
 
 //B: Run stuff you want timed
 stopWatch.Stop();
