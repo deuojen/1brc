@@ -1,14 +1,15 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using BenchmarkDotNet.Running;
 using strictly_come_coding;
 using System.Diagnostics;
 
 var stopWatch = new Stopwatch();
 stopWatch.Start();
 
-var test1 = new TestParsing();
-var result = test1.solution("measurements.txt");
+var test = new TestParsing3();
+var result = test.solution("measurements.txt");
+
+//new WriteToFile().TextWrite(result);
 
 //var summary = BenchmarkRunner.Run<ParserBenchmarks>();
 

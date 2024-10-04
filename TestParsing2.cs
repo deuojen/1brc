@@ -14,40 +14,42 @@ namespace strictly_come_coding
 
             try
             {
-                //var location = new Location("Abha");
-
                 var dict = new Dictionary<string, Location>();
                 var nameSet = new SortedSet<string>();
 
+                var allLines = new string[1000000000];
+
                 // Create an instance of StreamReader to read from a file.
                 // The using statement also closes the StreamReader.
-                using (StreamReader sr = new StreamReader(inputFile))
+                using (StreamReader sr = File.OpenText(inputFile))
                 {
-                    string? line;
-                    // Read and display lines from the file until the end of
-                    // the file is reached.
-                    while ((line = sr.ReadLine() ?? null) != null)
+
+                    int x = 0;
+                    while (!sr.EndOfStream)
                     {
-                        var split = line.Split(';');
-                        var name = split[0];
-                        var temp = float.Parse(split[1]);
-
-                        if (dict.ContainsKey(name))
-                        {
-                            dict[name].Temps.Add(temp);
-                        }
-                        else
-                        {
-                            nameSet.Add(name);
-                            var location = new Location(name);
-                            location.Temps.Add(temp);
-
-                            dict.Add(name, location);
-                        }
+                        allLines[x] = sr.ReadLine() ?? "";
+                        x += 1;
                     }
                 }
 
+                Parallel.For(0, allLines.Length, x =>
+                {
+                    var split = allLines[x].Split(';');
+                    var name = split[0];
+                    var temp = float.Parse(split[1]);
 
+                    if (dict.ContainsKey(name))
+                    {
+                        dict[name].Temps.Add(temp);
+                    }
+                    else
+                    {
+                        var location = new Location(name);
+                        location.Temps.Add(temp);
+
+                        dict.Add(name, location);
+                    }
+                });
 
                 //Console.WriteLine($"{location.City}={location.GetMin()}/{location.GetMean().ToString("N1")}/{location.GetMax()}");
 

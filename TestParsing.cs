@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -47,10 +48,10 @@ namespace strictly_come_coding
 
                 //Console.WriteLine($"{location.City}={location.GetMin()}/{location.GetMean().ToString("N1")}/{location.GetMax()}");
 
-                //result = dict.OrderBy(x => x.Key).Select(x => x.Value.ToString()).ToList();
+                result = dict.OrderBy(x => x.Key).Select(x => x.Value.ToString()).ToList();
 
                 // test no sort
-                result = dict.Select(x => x.Value.ToString()).ToList();
+                //result = dict.Select(x => x.Value.ToString()).ToList();
 
             }
             catch (Exception e)
@@ -61,14 +62,6 @@ namespace strictly_come_coding
             }
 
             return result;
-        }
-
-        public void WriteOutput(List<string> outputs, string filename= "result.txt") {
-            if (File.Exists(filename))
-            {
-                File.Delete(filename);
-            }
-            File.WriteAllLines(filename, outputs);
         }
     }
 }
