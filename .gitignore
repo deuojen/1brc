@@ -31,3 +31,4 @@ venv/
 /bin
 /obj
 /BenchmarkDotNet.Artifacts
+/result.txt

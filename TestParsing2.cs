@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace strictly_come_coding
 {
-    public class TestParsing
+    public class TestParsing2
     {
         public List<string> solution(string inputFile)
         {
@@ -17,6 +17,7 @@ namespace strictly_come_coding
                 //var location = new Location("Abha");
 
                 var dict = new Dictionary<string, Location>();
+                var nameSet = new SortedSet<string>();
 
                 // Create an instance of StreamReader to read from a file.
                 // The using statement also closes the StreamReader.
@@ -37,6 +38,7 @@ namespace strictly_come_coding
                         }
                         else
                         {
+                            nameSet.Add(name);
                             var location = new Location(name);
                             location.Temps.Add(temp);
 
@@ -45,12 +47,11 @@ namespace strictly_come_coding
                     }
                 }
 
+
+
                 //Console.WriteLine($"{location.City}={location.GetMin()}/{location.GetMean().ToString("N1")}/{location.GetMax()}");
 
-                //result = dict.OrderBy(x => x.Key).Select(x => x.Value.ToString()).ToList();
-
-                // test no sort
-                result = dict.Select(x => x.Value.ToString()).ToList();
+                result = dict.OrderBy(x => x.Key).Select(x => x.Value.ToString()).ToList();
 
             }
             catch (Exception e)
@@ -61,14 +62,7 @@ namespace strictly_come_coding
             }
 
             return result;
-        }
 
-        public void WriteOutput(List<string> outputs, string filename= "result.txt") {
-            if (File.Exists(filename))
-            {
-                File.Delete(filename);
-            }
-            File.WriteAllLines(filename, outputs);
         }
     }
 }
