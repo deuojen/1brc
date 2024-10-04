@@ -7,10 +7,17 @@ using System.Diagnostics;
 var stopWatch = new Stopwatch();
 stopWatch.Start();
 
-//var test1 = new TestParsing();
-//test1.solution("measurements.txt");
+var test1 = new TestParsing();
+var result = test1.solution("measurements.txt");
+var target = "result.txt";
+if(File.Exists(target))
+{
+    File.Delete(target);
+}
+File.WriteAllLines(target, result);
 
-var summary = BenchmarkRunner.Run<ParserBenchmarks>();
+
+//var summary = BenchmarkRunner.Run<ParserBenchmarks>();
 
 //B: Run stuff you want timed
 stopWatch.Stop();
