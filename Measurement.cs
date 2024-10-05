@@ -24,6 +24,7 @@ namespace strictly_come_coding
             Total = value;
             Max = value;
             Count = 0;
+            Mean = 0;
         }
 
         public void Add(float value)
@@ -34,12 +35,11 @@ namespace strictly_come_coding
 
             Total += value;
             Count++;
-
-            Mean = Total / Count;
         }
 
         public override string ToString()
         {
+            Mean = Total / Count;
             return $"{Min.ToString("N1")};{Mean.ToString("N1")};{Max.ToString("N1")}";
         }
     }
