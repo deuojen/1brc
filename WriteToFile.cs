@@ -14,11 +14,13 @@ namespace strictly_come_coding
             {
                 File.Delete(filename);
             }
-            using (TextWriter tw = new StreamWriter(filename))
-            {
-                foreach (String s in outputs)
-                    tw.WriteLine(s);
-            }
+            File.WriteAllLines(filename, outputs);
+
+            //using (TextWriter tw = new StreamWriter(filename))
+            //{
+            //    foreach (String s in outputs)
+            //        tw.WriteLine(s);
+            //}
         }
     }
 }

@@ -17,6 +17,8 @@ namespace strictly_come_coding
 
             try
             {
+                Console.WriteLine("{0} parsing starting.", DateTime.Now);
+
                 var dict = new Dictionary<string, Measurement>();
                 // Create an instance of StreamReader to read from a file.
                 // The using statement also closes the StreamReader.
@@ -39,17 +41,17 @@ namespace strictly_come_coding
 
                         var name = spanned.Slice(0, splitIndex);
                         var temp = spanned.Slice(splitIndex + 1);
-                        var tempInt = float.Parse(temp);
+                        var tempFloat = float.Parse(temp);
 
                         ref var valOrNull = ref CollectionsMarshal.GetValueRefOrNullRef(dict, name.ToString());
 
                         if (!Unsafe.IsNullRef(ref valOrNull))
                         {
-                            dict[name.ToString()].Add(tempInt);
+                            dict[name.ToString()].Add(tempFloat);
                         }
                         else
                         {
-                            var measurement = new Measurement(tempInt);
+                            var measurement = new Measurement(tempFloat);
                             dict.Add(name.ToString(), measurement);
                         }
 
@@ -57,7 +59,11 @@ namespace strictly_come_coding
                     }
                 }
 
+                //Console.WriteLine("{0} sorting starting.", DateTime.Now);
+
                 result = dict.OrderBy(x => x.Key).Select(x => $"{x.Key}={x.Value.ToString()}").ToList();
+
+                //Console.WriteLine("{0} sorting complete.", DateTime.Now);
 
             }
             catch (Exception e)

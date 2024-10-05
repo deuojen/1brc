@@ -16,6 +16,8 @@ namespace strictly_come_coding
 
         public float Count;
 
+        public float Mean;
+
         public Measurement(float value)
         {
             Min = value;
@@ -32,11 +34,13 @@ namespace strictly_come_coding
 
             Total += value;
             Count++;
+
+            Mean = Total / Count;
         }
 
         public override string ToString()
         {
-            return $"{Min.ToString("N1")};{(Total/ Count).ToString("N1")};{Max.ToString("N1")}";
+            return $"{Min.ToString("N1")};{Mean.ToString("N1")};{Max.ToString("N1")}";
         }
     }
 }
