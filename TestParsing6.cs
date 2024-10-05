@@ -26,35 +26,32 @@ namespace strictly_come_coding
                 using (StreamReader sr = new StreamReader(inputFile))
                 {
                     int index = 0;
-                    string? line;
                     // row count 1_000_000_000
                     // Read and display lines from the file until the end of
                     // the file is reached.
-                    while ((line = sr.ReadLineAsync().GetAwaiter().GetResult() ?? null) != null)
+                    while (!sr.EndOfStream)
                     {
 
                         if (index % 100_000_000 == 0)
                         {
-                            Console.WriteLine("i: {0}, l: {1}", index, line);
+                            Console.WriteLine("i: {0}", index);
                         }
 
+                        var line = sr.ReadLine().AsSpan();
                         var splitIndex = line.IndexOf(';');
-                        var spanned = line.AsSpan();
+                        var city = line.Slice(0, splitIndex);
+                        var tempFloat = float.Parse(line.Slice(splitIndex + 1));
 
-                        var name = spanned.Slice(0, splitIndex);
-                        var temp = spanned.Slice(splitIndex + 1);
-                        var tempFloat = float.Parse(temp);
-
-                        ref var valOrNull = ref CollectionsMarshal.GetValueRefOrNullRef(dict, name.ToString());
+                        ref var valOrNull = ref CollectionsMarshal.GetValueRefOrNullRef(dict, city.ToString());
 
                         if (!Unsafe.IsNullRef(ref valOrNull))
                         {
-                            dict[name.ToString()].Add(tempFloat);
+                            dict[city.ToString()].Add(tempFloat);
                         }
                         else
                         {
                             var measurement = new Measurement(tempFloat);
-                            dict.Add(name.ToString(), measurement);
+                            dict.Add(city.ToString(), measurement);
                         }
 
                         index++;

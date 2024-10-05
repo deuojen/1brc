@@ -23,11 +23,11 @@ namespace strictly_come_coding
             Min = value;
             Total = value;
             Max = value;
-            Count = 0;
+            Count = 1;
             Mean = 0;
         }
 
-        public Measurement Add(float value)
+        public void Add(float value)
         {
             if ( value < Min ) Min = value;
 
@@ -36,7 +36,7 @@ namespace strictly_come_coding
             Total += value;
             Count++;
 
-            return this;
+            //return this;
         }
 
         public override string ToString()
