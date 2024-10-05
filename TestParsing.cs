@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,26 +23,41 @@ namespace strictly_come_coding
                 // The using statement also closes the StreamReader.
                 using (StreamReader sr = new StreamReader(inputFile))
                 {
+                    int index = 0;
                     string? line;
                     // Read and display lines from the file until the end of
                     // the file is reached.
                     while ((line = sr.ReadLine() ?? null) != null)
                     {
-                        var split = line.Split(';');
-                        var name = split[0];
-                        var temp = float.Parse(split[1]);
-
-                        if (dict.ContainsKey(name))
+                        if (index % 100_000_000 == 0)
                         {
-                            dict[name].Temps.Add(temp);
+                            Console.WriteLine("i: {0}, l: {1}", index, line);
+                        }
+
+                        var splitIndex = line.IndexOf(';');
+                        var spanned = line.AsSpan();
+
+                        var name = spanned.Slice(0, splitIndex);
+                        var temp = spanned.Slice(splitIndex + 1);
+                        var tempFloat = float.Parse(temp);
+
+                        //var split = line.Split(';');
+                        //var name = split[0];
+                        //var temp = float.Parse(split[1]);
+
+                        if (dict.ContainsKey(name.ToString()))
+                        {
+                            dict[name.ToString()].Temps.Add(tempFloat);
                         }
                         else
                         {
-                            var location = new Location(name);
-                            location.Temps.Add(temp);
+                            var location = new Location(name.ToString());
+                            location.Temps.Add(tempFloat);
 
-                            dict.Add(name, location);
+                            dict.Add(name.ToString(), location);
                         }
+
+                        index++;
                     }
                 }
 

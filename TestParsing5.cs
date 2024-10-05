@@ -47,8 +47,12 @@ namespace strictly_come_coding
 
                         if (!Unsafe.IsNullRef(ref valOrNull))
                         {
-                            dict[name.ToString()].Add(tempFloat);
+                            dict[name.ToString()] = dict[name.ToString()].Add(tempFloat);
                         }
+                        //if (dict.ContainsKey(name.ToString()))
+                        //{
+                        //    dict[name.ToString()] = dict[name.ToString()].Add(tempFloat);
+                        //}
                         else
                         {
                             var measurement = new Measurement(tempFloat);
