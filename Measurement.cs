@@ -27,7 +27,7 @@ namespace strictly_come_coding
             Mean = 0;
         }
 
-        public void Add(float value)
+        public Measurement Add(float value)
         {
             if ( value < Min ) Min = value;
 
@@ -36,7 +36,7 @@ namespace strictly_come_coding
             Total += value;
             Count++;
 
-            //return this;
+            return this;
         }
 
         public override string ToString()

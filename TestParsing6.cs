@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace strictly_come_coding
 {
@@ -25,7 +26,7 @@ namespace strictly_come_coding
                 // The using statement also closes the StreamReader.
                 using (StreamReader sr = new StreamReader(inputFile))
                 {
-                    int index = 0;
+                    int index = 1;
                     // row count 1_000_000_000
                     // Read and display lines from the file until the end of
                     // the file is reached.
@@ -46,8 +47,12 @@ namespace strictly_come_coding
 
                         if (!Unsafe.IsNullRef(ref valOrNull))
                         {
-                            dict[city.ToString()].Add(tempFloat);
+                            dict[city.ToString()] = dict[city.ToString()].Add(tempFloat);
                         }
+                        //if (dict.ContainsKey(city.ToString()))
+                        //{
+                        //    dict[city.ToString()] = dict[city.ToString()].Add(tempFloat);
+                        //}
                         else
                         {
                             var measurement = new Measurement(tempFloat);

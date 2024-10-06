@@ -20,7 +20,7 @@ namespace strictly_come_coding
                 // The using statement also closes the StreamReader.
                 using (StreamReader sr = new StreamReader(inputFile))
                 {
-                    int index = 0;
+                    int index = 1;
                     string? line;
                     // row count 1_000_000_000
                     // Read and display lines from the file until the end of
