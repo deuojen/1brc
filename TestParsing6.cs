@@ -1,4 +1,5 @@
-﻿using System;
+﻿using csFastFloat;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace strictly_come_coding
 
             try
             {
-                Console.WriteLine("{0} parsing starting.", DateTime.Now);
+                //Console.WriteLine("{0} parsing starting.", DateTime.Now);
 
                 var dict = new Dictionary<string, Measurement>();
 
@@ -26,22 +27,22 @@ namespace strictly_come_coding
                 // The using statement also closes the StreamReader.
                 using (StreamReader sr = new StreamReader(inputFile))
                 {
-                    int index = 1;
+                    //int index = 1;
                     // row count 1_000_000_000
                     // Read and display lines from the file until the end of
                     // the file is reached.
                     while (!sr.EndOfStream)
                     {
 
-                        if (index % 100_000_000 == 0)
-                        {
-                            Console.WriteLine("{0} - i: {1}", DateTime.Now, index);
-                        }
+                        //if (index % 100_000_000 == 0)
+                        //{
+                        //    Console.WriteLine("{0} - i: {1}", DateTime.Now, index);
+                        //}
 
                         var line = sr.ReadLine().AsSpan();
                         var splitIndex = line.IndexOf(';');
                         var city = line.Slice(0, splitIndex);
-                        var tempFloat = float.Parse(line.Slice(splitIndex + 1));
+                        var tempFloat = FastFloatParser.ParseFloat(line.Slice(splitIndex + 1));
 
                         ref var valOrNull = ref CollectionsMarshal.GetValueRefOrNullRef(dict, city.ToString());
 
@@ -59,11 +60,11 @@ namespace strictly_come_coding
                             dict.Add(city.ToString(), measurement);
                         }
 
-                        index++;
+                        //index++;
                     }
                 }
 
-                Console.WriteLine("{0} sorting starting.", DateTime.Now);
+                //Console.WriteLine("{0} sorting starting.", DateTime.Now);
                 result = dict.OrderBy(x => x.Key).Select(x => $"{x.Key}={x.Value.ToString()}").ToList();
 
             }
