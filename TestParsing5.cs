@@ -33,7 +33,7 @@ namespace strictly_come_coding
                     {
                         if (index % 100_000_000 == 0)
                         {
-                            Console.WriteLine("i: {0}, l: {1}", index, line);
+                            Console.WriteLine("{0} i: {1}, l: {2}", DateTime.Now, index, line);
                         }
 
                         var splitIndex = line.IndexOf(';');
@@ -63,8 +63,7 @@ namespace strictly_come_coding
                     }
                 }
 
-                //Console.WriteLine("{0} sorting starting.", DateTime.Now);
-
+                Console.WriteLine("{0} sorting starting.", DateTime.Now);
                 result = dict.OrderBy(x => x.Key).Select(x => $"{x.Key}={x.Value.ToString()}").ToList();
 
                 //Console.WriteLine("{0} sorting complete.", DateTime.Now);
