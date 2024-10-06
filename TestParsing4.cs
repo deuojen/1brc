@@ -38,7 +38,7 @@ namespace strictly_come_coding
 
                         if (dict.ContainsKey(name))
                         {
-                            dict[name].Add(temp);
+                            dict[name].Update(temp);
                         }
                         else
                         {

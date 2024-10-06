@@ -27,7 +27,7 @@ namespace strictly_come_coding
             Mean = 0;
         }
 
-        public Measurement Add(float value)
+        public Measurement Update(float value)
         {
             if ( value < Min ) Min = value;
 

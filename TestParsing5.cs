@@ -47,7 +47,7 @@ namespace strictly_come_coding
 
                         if (!Unsafe.IsNullRef(ref valOrNull))
                         {
-                            dict[name.ToString()].Add(tempFloat);
+                            dict[name.ToString()] = valOrNull.Update(tempFloat);
                         }
                         //if (dict.ContainsKey(name.ToString()))
                         //{
