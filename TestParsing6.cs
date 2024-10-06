@@ -34,7 +34,7 @@ namespace strictly_come_coding
 
                         if (index % 100_000_000 == 0)
                         {
-                            Console.WriteLine("i: {0}", index);
+                            Console.WriteLine("{0} - i: {1}", DateTime.Now, index);
                         }
 
                         var line = sr.ReadLine().AsSpan();
@@ -58,11 +58,8 @@ namespace strictly_come_coding
                     }
                 }
 
-                //Console.WriteLine("{0} sorting starting.", DateTime.Now);
-
+                Console.WriteLine("{0} sorting starting.", DateTime.Now);
                 result = dict.OrderBy(x => x.Key).Select(x => $"{x.Key}={x.Value.ToString()}").ToList();
-
-                //Console.WriteLine("{0} sorting complete.", DateTime.Now);
 
             }
             catch (Exception e)
