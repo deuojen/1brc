@@ -29,7 +29,7 @@ namespace strictly_come_coding
 
                 var position = 0;
 
-                var dict = new Dictionary<byte[], Measurement>();
+                var dict = new Dictionary<string, Measurement>();
 
                 await using var fileStream = File.OpenRead(inputFile);
                 //await using var decompressionStream = new GZipStream(fileStream, CompressionMode.Decompress);
@@ -72,7 +72,7 @@ namespace strictly_come_coding
             return result;
         }
 
-        private static SequencePosition ParseLines(Dictionary<byte[], Measurement> items, ref ReadOnlySequence<byte> buffer, ref int position)
+        private static SequencePosition ParseLines(Dictionary<string, Measurement> items, ref ReadOnlySequence<byte> buffer, ref int position)
         {
             var reader = new SequenceReader<byte>(buffer);
 
@@ -82,7 +82,7 @@ namespace strictly_come_coding
 
                 var splitIndex = line.IndexOf(SemiColon);
 
-                var city = line.Slice(0, splitIndex).ToArray();
+                var city = Encoding.UTF8.GetString(line.Slice(0, splitIndex));
                 var tempFloat = FastFloatParser.ParseFloat(line.Slice(splitIndex + 1));
 
                 //var parsedLine = LineParser.ParseLine(line);
