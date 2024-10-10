@@ -18,6 +18,7 @@ namespace strictly_come_coding
     public static class TestParsing7
     {
         private static ReadOnlySpan<byte> NewLine => "\r\n"u8;
+        private static byte SemiColon = (byte)';';
         public static async Task<List<string>> solution(string inputFile)
         {
             var result = new List<string>();
@@ -79,22 +80,28 @@ namespace strictly_come_coding
             {
                 if (!reader.TryReadToAny(out ReadOnlySpan<byte> line, NewLine, true)) break;
 
-                var parsedLine = LineParser.ParseLine(line);
+                var splitIndex = line.IndexOf(SemiColon);
 
-                if (parsedLine.HasValue)
+                var city = Encoding.UTF8.GetString(line.Slice(0, splitIndex));
+                var tempFloat = FastFloatParser.ParseFloat(line.Slice(splitIndex + 1));
+
+                //var parsedLine = LineParser.ParseLine(line);
+
+                //if (parsedLine.HasValue)
+                //{
+
+                ref var valOrNull = ref CollectionsMarshal.GetValueRefOrNullRef(items, city);
+
+                if (!Unsafe.IsNullRef(ref valOrNull))
                 {
-                    ref var valOrNull = ref CollectionsMarshal.GetValueRefOrNullRef(items, parsedLine.Value.Name);
-
-                    if (!Unsafe.IsNullRef(ref valOrNull))
-                    {
-                        items[parsedLine.Value.Name.ToString()] = valOrNull.Update(parsedLine.Value.Temp);
-                    }
-                    else
-                    {
-                        var measurement = new Measurement(parsedLine.Value.Temp);
-                        items.Add(parsedLine.Value.Name.ToString(), measurement);
-                    }
+                    items[city] = valOrNull.Update(tempFloat);
                 }
+                else
+                {
+                    var measurement = new Measurement(tempFloat);
+                    items.Add(city, measurement);
+                }
+                //}
 
             }
 
@@ -108,7 +115,7 @@ namespace strictly_come_coding
             public static MeasurementLineStruct? ParseLine(ReadOnlySpan<byte> line)
             {
                 var splitIndex = line.IndexOf(SemiColon);
-                
+
                 var city = Encoding.UTF8.GetString(line.Slice(0, splitIndex));
                 var tempFloat = FastFloatParser.ParseFloat(line.Slice(splitIndex + 1));
 
