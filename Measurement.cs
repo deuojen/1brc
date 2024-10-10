@@ -8,6 +8,8 @@ namespace strictly_come_coding
 {
     public struct Measurement
     {
+        public string Name;
+
         public float Min;
 
         public float Total;
@@ -25,6 +27,17 @@ namespace strictly_come_coding
             Max = value;
             Count = 1;
             Mean = 0;
+            Name = string.Empty;
+        }
+
+        public Measurement(string name, float value)
+        {
+            Min = value;
+            Total = value;
+            Max = value;
+            Count = 1;
+            Mean = 0;
+            Name = name;
         }
 
         public Measurement Update(float value)
