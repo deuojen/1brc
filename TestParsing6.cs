@@ -11,9 +11,9 @@ using System.Xml.Linq;
 
 namespace strictly_come_coding
 {
-    public class TestParsing6
+    public static class TestParsing6
     {
-        public List<string> solution(string inputFile)
+        public static List<string> solution(string inputFile)
         {
             var result = new List<string>();
 
