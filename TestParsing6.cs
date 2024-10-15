@@ -42,8 +42,8 @@ namespace strictly_come_coding
                         var line = sr.ReadLine().AsSpan();
                         var splitIndex = line.IndexOf(';');
                         var city = line.Slice(0, splitIndex);
-                        var tempFloat = FastFloatParser.ParseFloat(line.Slice(splitIndex + 1));
-                        //var tempFloat = float.Parse(line.Slice(splitIndex + 1));
+                        //var tempFloat = FastFloatParser.ParseFloat(line.Slice(splitIndex + 1));
+                        var tempFloat = float.Parse(line.Slice(splitIndex + 1));
 
                         ref var valOrNull = ref CollectionsMarshal.GetValueRefOrNullRef(dict, city.ToString());
 
