@@ -7,9 +7,8 @@ var stopWatch = new Stopwatch();
 stopWatch.Start();
 //Console.WriteLine("Stopwatch started.");
 
-// var test = new TestParsing7();
-//var result = await TestParsing7.solution("measurements.txt");
 var result = TestParsing6.solution("measurements.txt");
+//var result = await TestParsing8.ParseAsync("measurements.txt");
 
 new WriteToFile().TextWrite(result);
 

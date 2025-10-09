@@ -8,7 +8,7 @@ namespace strictly_come_coding
 {
     public class WriteToFile
     {
-        public void TextWrite(List<string> outputs, string filename = "result.txt")
+        public void TextWrite(IReadOnlyList<string> outputs, string filename = "result.txt")
         {
             if (File.Exists(filename))
             {
